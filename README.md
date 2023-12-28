@@ -48,9 +48,10 @@ Homebridge is set up to use the [Homebridge Webhooks plugin](https://www.npmjs.c
 I implemented the probe using the following hardware:
 
 - [Adafruit Feather ESP32-S3 with 4MB Flash 2MB PSRAM](https://www.adafruit.com/product/5477)
-- [Adafruit ]
+- [Adafruit Right Angle VEML7700 Lux Sensor](https://www.adafruit.com/product/5378)
+- [Adafruit Si7201 Temperature & Humidity Sensor](https://www.adafruit.com/product/3251)
 
-I choose these component is part because I could easily assemblt them using the STEMMA QT I2C interface. Since the probe is meant for outside use, 
+I choose these components in part because I could easily assemble them using the STEMMA QT I2C interface. I also happened to have them on-hand. Other sensors with CircuitPython drivers could be swapped out pretty simply. For example, during the prototyping of the probe, I used a [BH1750 light sensor](https://www.adafruit.com/product/4681) before replacing it with the VEML7700.
 
 ## Using different hardware
 
