@@ -1,6 +1,5 @@
 import os
 import board
-import busio
 import wifi
 import socketpool
 import adafruit_requests
@@ -22,7 +21,7 @@ from adafruit_displayio_layout.layouts.grid_layout import GridLayout
 np = DigitalInOut(board.NEOPIXEL_POWER)
 
 displayio.release_displays()
-i2c = busio.I2C(board.SCL, board.SDA)
+i2c = board.I2C()
 
 display_bus = displayio.I2CDisplay(i2c, device_address=0x3c)
 display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=128, height=32)
