@@ -18,6 +18,8 @@ np = DigitalInOut(board.NEOPIXEL_POWER)
 i2c = board.I2C()
 temp_sensor = SI7021(i2c)
 light_sensor = VEML7700(i2c)
+# sometimes the battery monitor times out. Trying a little sleep to give it time to wake up.
+time.sleep(1)
 batt = LC709203F(i2c)
 batt.pack_size = PackSize.MAH1000
 
