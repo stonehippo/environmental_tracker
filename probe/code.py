@@ -34,9 +34,6 @@ while not batt_monitor_is_ready:
 	except:
 		batt_monitor_is_ready = False
 
-def shorten(value):
-	return round(value, 1)
-
 def wifi_connect():
     wifi.radio.connect(os.getenv("CIRCUITPY_WIFI_SSID"), os.getenv("CIRCUITPY_WIFI_PASSWORD"))
     pool = socketpool.SocketPool(wifi.radio)
@@ -61,10 +58,11 @@ def update_battery(value):
 
 pool, requests = wifi_connect()
 
-raw_temp = temp_sensor.temperature
-c = shorten(raw_temp)
-h = shorten(temp_sensor.relative_humidity)
-l = shorten(light_sensor.lux)
+c = temp_sensor.temperature
+h = temp_sensor.relative_humidity
+l = light_sensor.lux
+if l == 0:
+	l = 0.0001 # The minimum value allowed by the HAP spec!
 
 update_homebridge('backyard_temp', c)
 update_homebridge('backyard_humidity', h)
