@@ -18,16 +18,21 @@ np = DigitalInOut(board.NEOPIXEL_POWER)
 i2c = board.I2C()
 temp_sensor = SI7021(i2c)
 light_sensor = VEML7700(i2c)
-# sometimes the battery monitor times out. Trying a little sleep to give it time to wake up.
-time.sleep(1)
+'''
+There are known issues with the LC709203F and Circuitpython < 9.0.0
+setting up a guard to keep from crashing.
+
+See also https://github.com/adafruit/circuitpython/issues/6311
+'''
 batt_monitor_is_ready = False
 while not batt_monitor_is_ready:
 	try:
 		batt = LC709203F(i2c)
+		batt.pack_size = PackSize.MAH1000
+		b = batt.cell_percent
 		batt_monitor_is_ready = True
 	except:
 		batt_monitor_is_ready = False
-batt.pack_size = PackSize.MAH1000
 
 def shorten(value):
 	return round(value, 1)
@@ -60,7 +65,6 @@ raw_temp = temp_sensor.temperature
 c = shorten(raw_temp)
 h = shorten(temp_sensor.relative_humidity)
 l = shorten(light_sensor.lux)
-b = batt.cell_percent
 
 update_homebridge('backyard_temp', c)
 update_homebridge('backyard_humidity', h)
