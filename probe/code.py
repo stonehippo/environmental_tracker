@@ -69,5 +69,5 @@ update_homebridge('backyard_humidity', h)
 update_homebridge('backyard_lux', l)
 update_battery(b)
 
-deep_sleep = alarm.time.TimeAlarm(monotonic_time=time.monotonic() + 30)
+deep_sleep = alarm.time.TimeAlarm(monotonic_time=time.monotonic() + 300)
 alarm.exit_and_deep_sleep_until_alarms(deep_sleep)
